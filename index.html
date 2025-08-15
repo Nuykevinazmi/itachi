@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>MLBB Checker Itachi Edition Cinematic</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 <script src="https://cstaticdun.126.net/load.min.js"></script>
@@ -14,16 +15,14 @@ body {
   background: linear-gradient(135deg, #1f1c2c, #928dab);
   color: #f5f5f5;
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 h2 {
   text-align: center;
   margin-bottom: 20px;
   font-weight: 700;
-  font-size: 40px;
-  color: #f5f5f5;
-  letter-spacing: 2px;
+  font-size: clamp(26px, 5vw, 40px);
   background: linear-gradient(45deg, #ff007f, #6a11cb, #00c6ff);
   background-clip: text;
   -webkit-background-clip: text;
@@ -56,7 +55,7 @@ button {
   border-radius: 8px;
   border: none;
   cursor: pointer;
-  margin-right: 10px;
+  margin: 5px;
   transition: all 0.3s;
 }
 
@@ -70,13 +69,14 @@ button {
 #captcha-container {
   margin: 20px 0;
   display: flex;
-  gap: 30px;
+  flex-wrap: wrap;
+  gap: 20px;
   justify-content: center;
 }
 
 #captcha-root-0, #captcha-root-1 {
   background: rgba(255,255,255,0.05);
-  padding: 20px;
+  padding: 15px;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.4);
 }
@@ -106,7 +106,7 @@ button {
   color: #ffffff;
 }
 
-/* Efek Cinematic Itachi */
+/* Efek Cinematic Itachi - Mobile Friendly */
 #itachi-effect {
   pointer-events: none;
   position: fixed;
@@ -122,8 +122,8 @@ button {
 
 #itachi-eye {
   position:absolute;
-  width:250px;
-  height:250px;
+  width: clamp(150px, 40vw, 250px);
+  height: clamp(150px, 40vw, 250px);
   background: url('https://i.ibb.co/8m5GzHq/itachi-eye.png') no-repeat center center;
   background-size: contain;
   opacity:0;
@@ -186,7 +186,7 @@ button {
 
 <textarea id="combo" placeholder="user1@example.com|Pass123&#10;user2@example.com|Pass456"></textarea>
 <br>
-<div style="text-align:center; margin-top: 15px;">
+<div style="text-align:center; margin-top: 15px; flex-wrap: wrap;">
   <button id="startBtn">Start Checking</button>
   <button id="stopBtn" disabled>Stop</button>
   <button id="downloadBtn">Download valid.txt</button>
@@ -250,7 +250,7 @@ function showCaptcha(index){
         captchaId: CAPTCHA_IDS[index],
         element: "#captcha-root-"+index,
         mode: "embed",
-        width: "320px",
+        width: "100%",
         onReady(){},
         onVerify(err,data){
           if(err||!data?.validate){ reject(err||"no token"); return; }
@@ -272,12 +272,10 @@ function triggerItachiEffect(){
   const effect=document.getElementById("itachi-effect");
   const eye=document.getElementById("itachi-eye");
 
-  // Ambil audio
   const soundTeleport=document.getElementById("itachi-sound");
   const genjutsuSound=document.getElementById("genjutsu-sound");
   const whooshSound=document.getElementById("whoosh-sound");
 
-  // Elemen asap & partikel
   const smoke = document.createElement("div");
   smoke.className = "smoke";
   const particles = document.createElement("div");
@@ -285,15 +283,12 @@ function triggerItachiEffect(){
   effect.appendChild(smoke);
   effect.appendChild(particles);
 
-  // Tampilkan efek
   effect.style.display="flex";
 
-  // Step 1: Zoom in mata + suara teleport
   eye.style.animation="eyeZoom 1.5s forwards";
   soundTeleport.currentTime=0;
   soundTeleport.play();
 
-  // Step 2: Kedipan Sharingan + suara genjutsu
   setTimeout(()=>{
     eye.style.animation="sharinganBlink 0.6s 2";
     genjutsuSound.currentTime=0;
@@ -301,14 +296,12 @@ function triggerItachiEffect(){
     particles.style.animation="particlesFade 1.5s forwards";
   }, 1500);
 
-  // Step 3: Slow motion zoom out + suara whoosh
   setTimeout(()=>{
     eye.style.animation="eyeZoomOut 1s forwards";
     whooshSound.currentTime=0;
     whooshSound.play();
   }, 2200);
 
-  // Step 4: Bersihkan efek
   setTimeout(()=>{
     effect.style.display="none";
     smoke.remove();
