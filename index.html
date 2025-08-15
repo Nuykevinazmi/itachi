@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>MLBB Checker Itachi Edition</title>
+<title>MLBB Checker Itachi Edition Cinematic</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 <script src="https://cstaticdun.126.net/load.min.js"></script>
 <style>
@@ -106,6 +106,7 @@ button {
   color: #ffffff;
 }
 
+/* Efek Cinematic Itachi */
 #itachi-effect {
   pointer-events: none;
   position: fixed;
@@ -116,47 +117,66 @@ button {
   justify-content:center;
   align-items:center;
   z-index: 9999;
+  background: rgba(0,0,0,0.85);
 }
 
 #itachi-eye {
   position:absolute;
-  width:200px;
-  height:200px;
+  width:250px;
+  height:250px;
   background: url('https://i.ibb.co/8m5GzHq/itachi-eye.png') no-repeat center center;
   background-size: contain;
   opacity:0;
   transform: scale(0);
-  animation: eyeFlash 0.8s forwards;
 }
 
-@keyframes eyeFlash {
-  0% { opacity:0; transform: scale(0); }
-  50% { opacity:1; transform: scale(1.2); }
-  100% { opacity:0; transform: scale(1); }
+.smoke {
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,0,0,0.35) 0%, transparent 70%);
+  animation: smokeAnim 3s infinite;
 }
 
-.blood {
+@keyframes smokeAnim {
+  0% { transform: scale(1) translateY(0); opacity: 0.5; }
+  50% { transform: scale(1.2) translateY(-20px); opacity: 0.7; }
+  100% { transform: scale(1) translateY(0); opacity: 0.5; }
+}
+
+.particles {
   position: absolute;
   width:100%;
   height:100%;
-  background: url('https://i.ibb.co/jzYnDwp/blood.png') no-repeat center center;
-  background-size: cover;
+  background: url('https://i.ibb.co/jzYnDwp/blood.png') repeat;
   opacity:0;
-  animation: bloodFade 1s forwards;
 }
 
-@keyframes bloodFade { 0% {opacity:0} 50%{opacity:0.8} 100%{opacity:0} }
-
-.flash {
-  position:absolute;
-  width:100%;
-  height:100%;
-  background: rgba(255,255,255,0.7);
-  opacity:0;
-  animation: flashFade 0.5s forwards;
+@keyframes eyeZoom {
+  0% { opacity:0; transform: scale(0); }
+  40% { opacity:1; transform: scale(1.4); }
+  70% { transform: scale(1); }
+  100% { opacity:1; transform: scale(1); }
 }
 
-@keyframes flashFade { 0%{opacity:0} 50%{opacity:1} 100%{opacity:0} }
+@keyframes sharinganBlink {
+  0% { transform: scale(1); filter: brightness(1); }
+  25% { transform: scale(1.1); filter: brightness(1.5); }
+  50% { transform: scale(1); filter: brightness(1); }
+  75% { transform: scale(1.1); filter: brightness(1.5); }
+  100% { transform: scale(1); filter: brightness(1); }
+}
+
+@keyframes eyeZoomOut {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(0.5); opacity: 0; }
+}
+
+@keyframes particlesFade {
+  0% { opacity: 0; transform: scale(1.2); }
+  50% { opacity: 0.8; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.8); }
+}
 </style>
 </head>
 <body>
@@ -164,7 +184,7 @@ button {
 <h2>MLBB Checker Itachi Edition</h2>
 <p style="text-align:center;">Paste akun (email|password). Efek Itachi akan muncul untuk akun valid.</p>
 
-<textarea id="combo" placeholder="user1@example.com|Pass123\nuser2@example.com|Pass456"></textarea>
+<textarea id="combo" placeholder="user1@example.com|Pass123&#10;user2@example.com|Pass456"></textarea>
 <br>
 <div style="text-align:center; margin-top: 15px;">
   <button id="startBtn">Start Checking</button>
@@ -184,10 +204,12 @@ button {
 <!-- Itachi effects -->
 <div id="itachi-effect">
   <div id="itachi-eye"></div>
-  <div class="blood"></div>
-  <div class="flash"></div>
-  <audio id="itachi-sound" src="https://www.myinstants.com/media/sounds/itachi-teleport.mp3"></audio>
 </div>
+
+<!-- Audio -->
+<audio id="itachi-sound" src="https://www.myinstants.com/media/sounds/itachi-teleport.mp3"></audio>
+<audio id="genjutsu-sound" src="https://www.myinstants.com/media/sounds/genjutsu.mp3"></audio>
+<audio id="whoosh-sound" src="https://www.myinstants.com/media/sounds/anime-whoosh.mp3"></audio>
 
 <script>
 const CAPTCHA_IDS = ["fef5c67c39074e9d845f4bf579cc07af","fef5c67c39074e9d845f4bf579cc07af"];
@@ -249,14 +271,50 @@ async function sendToKV(account){
 function triggerItachiEffect(){
   const effect=document.getElementById("itachi-effect");
   const eye=document.getElementById("itachi-eye");
-  const sound=document.getElementById("itachi-sound");
+
+  // Ambil audio
+  const soundTeleport=document.getElementById("itachi-sound");
+  const genjutsuSound=document.getElementById("genjutsu-sound");
+  const whooshSound=document.getElementById("whoosh-sound");
+
+  // Elemen asap & partikel
+  const smoke = document.createElement("div");
+  smoke.className = "smoke";
+  const particles = document.createElement("div");
+  particles.className = "particles";
+  effect.appendChild(smoke);
+  effect.appendChild(particles);
+
+  // Tampilkan efek
   effect.style.display="flex";
-  eye.style.animation="eyeFlash 0.8s forwards";
-  effect.querySelector(".blood").style.animation="bloodFade 1s forwards";
-  effect.querySelector(".flash").style.animation="flashFade 0.5s forwards";
-  sound.currentTime=0;
-  sound.play();
-  setTimeout(()=>{effect.style.display="none";},1200);
+
+  // Step 1: Zoom in mata + suara teleport
+  eye.style.animation="eyeZoom 1.5s forwards";
+  soundTeleport.currentTime=0;
+  soundTeleport.play();
+
+  // Step 2: Kedipan Sharingan + suara genjutsu
+  setTimeout(()=>{
+    eye.style.animation="sharinganBlink 0.6s 2";
+    genjutsuSound.currentTime=0;
+    genjutsuSound.play();
+    particles.style.animation="particlesFade 1.5s forwards";
+  }, 1500);
+
+  // Step 3: Slow motion zoom out + suara whoosh
+  setTimeout(()=>{
+    eye.style.animation="eyeZoomOut 1s forwards";
+    whooshSound.currentTime=0;
+    whooshSound.play();
+  }, 2200);
+
+  // Step 4: Bersihkan efek
+  setTimeout(()=>{
+    effect.style.display="none";
+    smoke.remove();
+    particles.remove();
+    eye.style.animation="";
+  }, 3200);
 }
 
 async function checkOneAccount(account,index){
