@@ -30,15 +30,9 @@
   }
 
   @keyframes glowingText {
-    0% {
-      text-shadow: 0 0 5px rgba(255, 255, 255, 0.6), 0 0 10px rgba(255, 255, 255, 0.4);
-    }
-    50% {
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(0, 255, 255, 0.7), 0 0 30px rgba(0, 255, 255, 0.6);
-    }
-    100% {
-      text-shadow: 0 0 5px rgba(255, 255, 255, 0.6), 0 0 10px rgba(255, 255, 255, 0.4);
-    }
+    0% { text-shadow: 0 0 5px rgba(255, 255, 255, 0.6), 0 0 10px rgba(255, 255, 255, 0.4); }
+    50% { text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(0, 255, 255, 0.7), 0 0 30px rgba(0, 255, 255, 0.6); }
+    100% { text-shadow: 0 0 5px rgba(255, 255, 255, 0.6), 0 0 10px rgba(255, 255, 255, 0.4); }
   }
 
   p {
@@ -163,7 +157,8 @@ const stopBtn = document.getElementById("stopBtn");
 const downloadBtn = document.getElementById("downloadBtn");
 
 // Audio Sharingan
-const sharinganAudio = new Audio("https://www.myinstants.com/media/sounds/sharingan.mp3"); // ganti URL jika perlu
+const sharinganAudio = new Audio("https://www.myinstants.com/media/sounds/sharingan.mp3");
+sharinganAudio.preload = "auto";
 
 function appendLog(text, cls) {
   const time = new Date().toLocaleTimeString();
@@ -315,7 +310,19 @@ async function startChecking() {
   stopBtn.disabled = true;
 }
 
-startBtn.addEventListener("click", startChecking);
+// Unlock audio saat klik start
+startBtn.addEventListener("click", () => {
+  sharinganAudio.muted = true;
+  sharinganAudio.play().then(() => {
+    sharinganAudio.pause();
+    sharinganAudio.muted = false;
+    startChecking();
+  }).catch(err => {
+    console.log("Audio unlock gagal:", err);
+    startChecking();
+  });
+});
+
 stopBtn.addEventListener("click", () => { stopRequested = true; appendLog("Stop diminta", "info"); });
 downloadBtn.addEventListener("click", () => {
   if(validAccounts.length === 0) { appendLog("Tidak ada akun valid untuk di-download", "info"); return; }
